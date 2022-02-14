@@ -1,174 +1,175 @@
-const axios = require('axios') //cambie la sintaxis de const axios a EMCAscript 6, pero no funciono :(
+const axios = require('axios')
 const { Pokemon, Type } = require('../db')
-const router = require('../routes')
 
-//me permite obtener los pokemons de la pokeapi
-const getPokeapi = async () => {
+//          TRAER POKEMON DE LA API
+
+const getPokemonApi = async () => {
   try {
-    const totalPokemonsRequest = await axios.get(
-      'https://pokeapi.co/api/v2/pokemon?limit=40',
-    ) //me devuelve los 40 objetitos con un name y una url de cada pokemon
-    const totalPokemonsSubrequest = totalPokemonsRequest.data.results.map(
-      (obj) => axios.get(obj.url),
-    ) //hago el axios pero a la sub url
-    const infoUrlPokemons = await axios.all(totalPokemonsSubrequest) //solicitudes simultaneas
+    const dataApi = await axios.get('https://pokeapi.co/api/v2/pokemon')
+    const dataApi2 = await axios.get(dataApi.data.next)
 
-    let pokemons = infoUrlPokemons.map((obj) => obj.data) //obtengo la data de cada pokemon por su suburl
-    let infoPokemons = pokemons.map((pokemon) => objPokeApi(pokemon))
-    return infoPokemons
+    const dataPokemon = dataApi.data.results.map((e) => axios.get(e.url))
+    const dataPokemon2 = dataApi2.data.results.map((e) => axios.get(e.url))
+
+    const concatPokemon = dataPokemon.concat(dataPokemon2)
+
+    const promisePokemon = await Promise.all(concatPokemon).then((e) => {
+      let pokemon = e.map((e) => e.data)
+
+      let pokemonsApi = []
+      pokemon.map((e) => {
+        pokemonsApi.push({
+          id: e.id,
+          name: e.name,
+          types: e.types.map((e) => e.type.name),
+          hp: e.stats[0].base_stat,
+          attack: e.stats[1].base_stat,
+          defense: e.stats[2].base_stat,
+          speed: e.stats[5].base_stat,
+          height: e.height,
+          weight: e.weight,
+          image: e.sprites.other.dream_world.front_default,
+        })
+      })
+
+      return pokemonsApi
+    })
+
+    return promisePokemon
   } catch (error) {
     console.log(error)
-    return error
   }
 }
 
-//me permite obtener los pokemons de la DB
-const getPokedb = async () => {
+//         TRAER POKEMON DE LA BD
+
+const getPokemonDb = async () => {
   try {
-    return await Pokemon.findAll({
-      //trae los pokemones, que incluyan el nombre del type (tipo join)
+    const pokemonsDb = await Pokemon.findAll({
       include: {
         model: Type,
-        attributes: ['name'], //me trae el name del type
+        attributes: ['name'],
+        through: {
+          attributer: [],
+        },
       },
     })
+
+    return pokemonsDb
   } catch (error) {
     console.log(error)
-    return error
   }
 }
 
-//me permite unir el array que me devuelve la pokeapi (40) pokemons + los pokemons creados en la DB pokemons
-const getAllPoke = async () => {
+//          JUNTAR POKEMONS API Y DB
+
+const getAllPokemons = async () => {
   try {
-    const apiPokeData = await getPokeapi()
-    const dbPokeData = await getPokedb()
-    // console.log(dbPokeData)
-    return [...apiPokeData, ...dbPokeData]
+    let pokemonApi = await getPokemonApi()
+    let pokemonDb = await getPokemonDb()
+    let allPokemon = pokemonApi.concat(pokemonDb)
+    return allPokemon
   } catch (error) {
     console.log(error)
-    return error
   }
 }
 
-//me permite obtener un poke por el name pasado en query
-const getPokeByName = async (name) => {
-    try {
-        const searchPokeNameDB = await Pokemon.findOne({
-            where: { name },            //encuentra primera coincidencia
-            include: { model: Type }
-        })
-        if (searchPokeNameDB) {
-            let pokedbName = {
-                id: searchPokeNameDB.id,
-                name: searchPokeNameDB.name,
-                life: searchPokeNameDB.life,
-                attack: searchPokeNameDB.attack,
-                defense: searchPokeNameDB.defense,
-                speed: searchPokeNameDB.speed,
-                height: searchPokeNameDB.height,
-                weight: searchPokeNameDB.weight,
-                sprite: searchPokeNameDB.sprite,
-                types: searchPokeNameDB.types.length < 2 ? [searchPokeNameDB.types[0]] : [searchPokeNameDB.types[0], searchPokeNameDB.types[1]]
-            }
-            return pokedbName;
-        }else {
-            const searchPokeapiName = await axios.get("https://pokeapi.co/api/v2/pokemon/" + name.toLowerCase());       //obtengo el pokemon de la url/name
-            const foundPokeapiName = objPokeApi(searchPokeapiName.data);
-            // console.log('foundPokeapi', foundPokeapiName)
-            return foundPokeapiName
-        }
-    } catch (error) {
-        console.log(error);
-        return error;
-    }
-};
+//          BUSCAR POKEMON POR ID DB
 
-//me permite obtener pokemon por id
-const getPokeById = async (id) => {
-    try {
-        if (id.length > 2) {
-            const searchPokeIdDB = await Pokemon.findOne({where: {id}, include: Type});
-            let pokedbId = {
-                id: searchPokeIdDB.id,
-                name: searchPokeIdDB.name,
-                life: searchPokeIdDB.life,
-                attack: searchPokeIdDB.attack,
-                defense: searchPokeIdDB.defense,
-                speed: searchPokeIdDB.speed,
-                height: searchPokeIdDB.height,
-                weight: searchPokeIdDB.weight,
-                sprite: searchPokeIdDB.sprite,
-                types: searchPokeIdDB.types.length < 2 ? [searchPokeIdDB.types[0]] : [searchPokeIdDB.types[0] , searchPokeIdDB.types[1]]
-            }
-            return pokedbId;
-        } else {
-            const searchPokeapiId = await axios.get("https://pokeapi.co/api/v2/pokemon/" + id.toString());
-            const foundPokeapiId = objPokeApi(searchPokeapiId.data);
-            // console.log('foundPokeapi', foundPokeapiId)
-            return foundPokeapiId;     //pokemon por id en pokeapi
-        }
-    } catch (error) {
-        console.log(error);
-        return error;
+const getPokemonByIdDb = async (id) => {
+  try {
+    let searchIdDb = await Pokemon.findByPk(id, { include: { model: Type } })
+
+    let searchIdPokemonDb = {
+      id: searchIdDb.id,
+      image: searchIdDb.image,
+      name: searchIdDb.name,
+      types: searchIdDb.types.map((t) => t.name),
+      hp: searchIdDb.hp,
+      attack: searchIdDb.attack,
+      defense: searchIdDb.defense,
+      speed: searchIdDb.speed,
+      height: searchIdDb.height,
+      weight: searchIdDb.weight,
     }
 
+    return searchIdPokemonDb
+  } catch (error) {
+    return 'Pokemon no encontrado'
+  }
 }
 
-//objeto que devuelve la url/poke o /id o /name
-const objPokeApi = (poke) => {
-    const objPokeapi =
-    {
-        id: poke.id,
-        name: poke.name,
-        life: poke.stats[0].base_stat,
-        attack: poke.stats[1].base_stat,
-        defense: poke.stats[2].base_stat,
-        speed: poke.stats[5].base_stat,
-        height: poke.height,
-        weight: poke.weight,
-        sprite: poke.sprites.other.dream_world.front_default,
-        types: poke.types.length < 2 ? [{ name: poke.types[0].type.name}] : [{ name: poke.types[0].type.name}, { name: poke.types[1].type.name}]
-    };
-    return objPokeapi
-};
+//          BUSCAR POKEMON POR ID API
 
+const getPokemonByIdApi = async (id) => {
+  try {
+    let searchIdApi = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
 
-//permite hacer post de pokemon
+    if (searchIdApi) {
+      let searchIdPokemonApi = {
+        id: searchIdApi.data.id,
+        name: searchIdApi.data.name,
+        types: searchIdApi.data.types.map((e) => e.type.name),
+        hp: searchIdApi.data.stats[0].base_stat,
+        attack: searchIdApi.data.stats[1].base_stat,
+        defense: searchIdApi.data.stats[2].base_stat,
+        speed: searchIdApi.data.stats[5].base_stat,
+        height: searchIdApi.data.height,
+        weight: searchIdApi.data.weight,
+        image: searchIdApi.data.sprites.other.dream_world.front_default,
+      }
 
-const postPokedb = async (pokeData) => {
-    try {
-        const { name, life, attack, defense, speed, height, weight, sprite, types } = pokeData;
-        const myPoke = await Pokemon.create(
-            {
-                name,
-                life,
-                attack,
-                defense,
-                speed,
-                height,
-                weight,
-                sprite,
-            }
-        );
-        const pokeTypedb = await Type.findAll({
-            where: { name: types }         //donde el name coincida con los types que me pasan
-        });
-
-        let createdMyPoke = myPoke.addType(pokeTypedb);
-        return createdMyPoke;
-    } catch (error) {
-        console.log(error);
-        return error;
+      return searchIdPokemonApi
     }
-};
+  } catch (error) {
+    return 'Pokemon no encontrado'
+  }
+}
 
+//          BUSCAR POKEMON POR NAME API
+
+const getPokemonByNameApi = async (name) => {
+  try {
+    let nameApi = name.toLowerCase()
+    const pokemonApi = await axios.get(
+      `https://pokeapi.co/api/v2/pokemon/${nameApi}/`,
+    )
+
+    let nameSearchApi = {
+      id: pokemonApi.data.id,
+      name: pokemonApi.data.name,
+      types: pokemonApi.data.types.map((e) => e.type.name),
+      hp: pokemonApi.data.stats[0].base_stat,
+      attack: pokemonApi.data.stats[1].base_stat,
+      defense: pokemonApi.data.stats[2].base_stat,
+      speed: pokemonApi.data.stats[5].base_stat,
+      height: pokemonApi.data.height,
+      weight: pokemonApi.data.weight,
+      image: pokemonApi.data.sprites.other.dream_world.front_default,
+    }
+
+    return nameSearchApi
+  } catch (error) {
+    return 'Pokemon no encontrado'
+  }
+}
+
+//          BUSCAR POKEMON POR NAME DB
+
+const getPokemonByNameDb = async (name) => {
+  const pokemonsDb2 = await getPokemonDb()
+  const pokemonsDb2Filter = pokemonsDb2.filter(
+    (p) => p.name.toLowerCase() === name.toLowerCase(),
+  )
+  return pokemonsDb2Filter
+}
 
 module.exports = {
-    getPokeapi,
-    getPokedb,
-    getAllPoke,
-    getPokeByName,
-    getPokeById,
-    postPokedb,
+  getPokemonApi,
+  getPokemonDb,
+  getAllPokemons,
+  getPokemonByIdApi,
+  getPokemonByIdDb,
+  getPokemonByNameApi,
+  getPokemonByNameDb,
 }
