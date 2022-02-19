@@ -67,7 +67,7 @@ const getAllPokemons = async () => {
   try {
     let pokemonApi = await getPokemonApi()
     let pokemonDb = await getPokemonDb()
-    let allPokemon = pokemonApi.concat(pokemonDb)
+    let allPokemon = pokemonDb.concat(pokemonApi)
     return allPokemon
   } catch (error) {
     console.log(error)
