@@ -1,4 +1,5 @@
 import React from 'react'
+import style from './Home.module.css'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -80,15 +81,17 @@ export default function Home() {
 
   return (
     <div>
+      <h1 className= {style.neon} > POKEMON API </h1>
       <Link to="/pokemons">
-            <button>Crear Pokemon</button>
+            <button className= {style.button}>Crear Pokemon</button>
       </Link>
-
-      <h1> POKEMON API </h1>
-      <button onClick= {(e) => {handleClick(e)}}>Cargar todos los Pokemons</button>
+      <button className= {style.button} onClick= {(e) => {handleClick(e)}}>Cargar todos los Pokemons</button>
+      
+      <br/>
+      <br/>
       <div>
         <div>
-          <select
+          <select className= {style.select}
             onChange={(e) => {
               handleSort(e)
             }}
@@ -97,7 +100,7 @@ export default function Home() {
             <option value="zyx">Z-A</option>
           </select>
 
-          <select
+          <select className= {style.select}
             onChange={(e) => {
               handleSortStrange(e)
             }}
@@ -106,7 +109,7 @@ export default function Home() {
             <option value="fuerza+">Attack +</option>
           </select>
 
-          <select
+          <select className= {style.select}
             onChange={(e) => {
               handleFilterCreated(e)
             }}
@@ -115,7 +118,7 @@ export default function Home() {
             <option value="api">Pokedex</option>
             <option value="created">Created</option>
           </select>
-          <select
+          <select className= {style.select}
             onChange={(e) => {
               handleFilterType(e)
             }}
@@ -127,12 +130,13 @@ export default function Home() {
             ))}
           </select>
         </div>
+        <br/>
       </div>
 
       <div>
         <SearchBar/>
       </div>
-
+      <br/>
       <div>
         {allPokemons && (
           <Paginado

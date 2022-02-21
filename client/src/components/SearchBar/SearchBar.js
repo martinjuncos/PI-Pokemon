@@ -1,4 +1,5 @@
 import React from 'react';
+import style from './SearchBar.module.css'
 import {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {searchByName} from '../../actions/index';
@@ -20,14 +21,14 @@ export default function SearchBar(){
 
 
     return(
-        <div>
-            <input
+        <div >
+            <input className= {style.search}
             onChange={(e) => handleInputChange(e)}
             type= 'text'
             placeholder='search...'
             value= {name}
             />
-            <button
+            <button className= {style.search}
             onClick={(e) => handleSubmit(e)}
             type= 'submit'
             >Search
