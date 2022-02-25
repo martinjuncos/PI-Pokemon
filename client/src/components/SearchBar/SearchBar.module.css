@@ -1,20 +1,25 @@
-.search {
-    color: #dd490f;
-    border: 6px solid #977924;
-    border-radius: 10px;
-    padding: 10px 15px;
-    font-size: 15px;
-    font-family: tahoma;
-    letter-spacing: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    filter: drop-shadow(0 0 15px #977924) drop-shadow(0 0 50px #977924)
-      contrast(2) brightness(2);
-    transition: 0.5s;
-  }
-  
-  .search:hover {
-    color: white;
-    background-color: #977924;
-    filter: drop-shadow(0 0 20px #977924) contrast(2) brightness(2);
-  }
+.input{
+  background-color: azure;
+  color: rgb(8, 120, 168);
+  border: 3px solid rgba(0, 178, 255, 1);
+  width: 250px;
+  height: 43px;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: bold;   
+}
+
+.buttonBuscar{
+  background-color: azure;
+  color: rgb(8, 120, 168);
+  border: 3px solid rgba(0, 178, 255, 1);
+  width: 100px;
+  height: 50px;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: bold; 
+}
+.buttonBuscar:hover {
+  color: white;
+  background-color: rgba(0, 178, 255, 1);
+}

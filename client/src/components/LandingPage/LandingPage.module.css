@@ -1,32 +1,60 @@
-.neon {
-  font-size: 30px;
-  letter-spacing: -2px;
-  color: #fff;
-  margin-top: 10%;
-  text-shadow: 0 0 5px rgba(0, 178, 255, 1), 0 0 10px rgba(0, 178, 255, 1),
-    0 0 20px rgba(0, 178, 255, 1), 0 0 40px rgba(38, 104, 127, 1),
-    0 0 80px rgba(38, 104, 127, 1), 0 0 90px rgba(38, 104, 127, 1),
-    0 0 100px rgba(38, 104, 127, 1), 0 0 140px rgba(38, 104, 127, 1),
-    0 0 180px rgba(38, 104, 127, 1);
-}
 
-.button {
+.buttonLanding {
   color: #db3eb1;
   border: 6px solid #db3eb1;
-  border-radius: 15px;
-  padding: 15px 25px;
+  width: 300px;
+  height: 100px;
+  margin-top:50px;
+  border-radius: 20px;
   font-size: 30px;
-  font-family: tahoma;
-  letter-spacing: 5px;
-  cursor: pointer;
   font-weight: bold;
   filter: drop-shadow(0 0 15px #db3eb1) drop-shadow(0 0 50px #db3eb1)
     contrast(2) brightness(2);
   transition: 0.5s;
 }
 
-.button:hover {
+.buttonLanding:hover {
   color: white;
   background-color: #db3eb1;
   filter: drop-shadow(0 0 20px #db3eb1) contrast(2) brightness(2);
+}  
+
+.landing{
+  background: url('https://assets.pokemon.com//assets/cms2/img/misc/virtual-backgrounds/pokemon/detective-pikachu.jpg'); 
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  height: 1000px;
+  padding-top: 100px;
+  
+
 }
+
+.titulo{
+  color: aqua;
+  font-size: 60px;
+}
+
+.subtitulo{
+  color: fuchsia;
+  font-size: 40px;
+  margin-top: 20px;
+}
+
+/* .button1{
+  width: 200px;
+  height: 50px;
+  margin-top: 100px;
+  background-color: yellow;
+  color:black;
+  font-size: 30px;
+}
+
+.button1:hover{
+  width: 220px;
+  height: 60px;
+  font-size: 35px;
+}  */
+
+ 

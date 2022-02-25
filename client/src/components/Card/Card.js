@@ -5,9 +5,11 @@ export default function Card({ name, image, types }) {
 
   let typePokemon = types.map((e, index) => {
     const nameType = e.name ? e.name : e;
-    return <li key={index}>{nameType}</li>;
+    return <p key={index}>{nameType}</p>;
     
   });
+
+ 
 
   return (
       <div> 
@@ -17,11 +19,11 @@ export default function Card({ name, image, types }) {
         
 
       <div className= {style.neon}>
-        <h1>{name}</h1>
+        <h1 className={style.nombre}>{name}</h1>
       </div>
 
       <div>
-        <img src={image} alt="img not found" width="250" height="150" />
+        <img src={image} alt="img not found" width="150" height="150" />
       </div>
 
       <div>

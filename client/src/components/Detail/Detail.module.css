@@ -1,75 +1,66 @@
-body {
-	margin: 0;
-	padding: 0;
-	background-color: #000;
-}
-.neon {
-    color: #fff;
-    margin-top: 10%;
-    text-shadow: 0 0 5px rgba(0, 178, 255, 1), 0 0 10px rgba(0, 178, 255, 1),
-      0 0 20px rgba(0, 178, 255, 1), 0 0 40px rgba(38, 104, 127, 1),
-      0 0 80px rgba(38, 104, 127, 1), 0 0 90px rgba(38, 104, 127, 1),
-      0 0 100px rgba(38, 104, 127, 1), 0 0 140px rgba(38, 104, 127, 1),
-      0 0 180px rgba(38, 104, 127, 1);
-  }
-
-
-
-.block {
-	position: relative;
-	margin: 50px auto 0;
-	width: 300px;
-	height: auto;
-	background: linear-gradient(0deg, #000, #272727);
+.container{
+	background: url('https://eskipaper.com/images/pokemon-backgrounds-9.jpg');
+	background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 930px;
+	padding-top: 50px;
 }
 
-.block:before, .block:after {
-	content: '';
-	position: absolute;
-	left: -2px;
-	top: -2px;
-	background: linear-gradient(45deg, #fb0094, #0000ff, #00ff00,#ffff00, #ff0000, #fb0094, 
-		#0000ff, #00ff00,#ffff00, #ff0000);
-	background-size: 400%;
-	width: calc(100% + 4px);
-	height: calc(100% + 4px);
-	z-index: -1;
-	animation: steam 20s linear infinite;
+.name{
+	font-size: 70px;
+	letter-spacing: -2px;
+	color: #fff;
+	text-shadow: 0 0 5px #D6552E, 0 0 10px #D6552E,
+	  0 0 20px #D6552E, 0 0 60px #5a3023,
+	  0 0 100px #5a3023, 0 0 160px #5a3023;
 }
 
-@keyframes steam {
-	0% {
-		background-position: 0 0;
-	}
-	50% {
-		background-position: 400% 0;
-	}
-	100% {
-		background-position: 0 0;
-	}
+h3{
+	font-size: 20px;
+	letter-spacing: -2px;
+	color: #fff;
+	text-shadow: 0 0 5px #D6552E, 0 0 10px #D6552E,
+	  0 0 20px #D6552E, 0 0 60px #5a3023,
+	  0 0 100px #5a3023, 0 0 160px #5a3023;	
 }
 
-.block:after {
-	filter: blur(50px);
+h2{
+	font-size: 30px;
+	letter-spacing: -2px;
+	color: #fff;
+	text-shadow: 0 0 5px #D6552E, 0 0 10px #D6552E,
+	  0 0 20px #D6552E, 0 0 60px #5a3023,
+	  0 0 100px #5a3023, 0 0 160px #5a3023;}
+
+.img{
+	height: 400px;
+	width: auto;
+}
+.buttonDetail {
+	width: 200px;
+	height: 50px;
+	margin-bottom: 50px;
+	cursor: pointer;
+	background: #6dd6d1;
+	border: none;
+	border-radius: 10px;
+	box-shadow: 0px 10px 25px #57aba7, 0px -10px 25px #a6fffa, inset 0px -5px 10px #57aba7, inset 0px 5px 10px #a6fffa;
+	color: rgb(240, 229, 229);
+	font-size: 30px;
+	transition: 500ms;
 }
 
-.button {
-    color: #3e94db;
-    border: 6px solid #3e94db;
-    border-radius: 10px;
-    padding: 15px 25px;
-    font-size: 20px;
-    font-family: tahoma;
-    letter-spacing: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    filter: drop-shadow(0 0 15px #3e94db) drop-shadow(0 0 50px #3e94db)
-      contrast(2) brightness(2);
-    transition: 0.5s;
-  }
-  
-  .button:hover {
-    color: white;
-    background-color: #3e94db;
-    filter: drop-shadow(0 0 20px #3e94db) contrast(2) brightness(2);
-  }
+.buttonDetail:hover {
+		border: 2px solid #6dd6d1;
+	animation: hueRotation 2s linear infinite;
+}
+
+@keyframes hueRotation {
+	to {filter: hue-rotate(360deg);}
+}
+
+.buttonDetail:focus {
+	outline: none;
+}

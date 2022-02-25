@@ -1,20 +1,18 @@
-.button {
-    color: #4f669c;
-    border: 6px solid #4f669c;
-    border-radius: 10px;
-    padding: 10px 15px;
-    font-size: 10px;
-    font-family: tahoma;
-    letter-spacing: 5px;
-    cursor: pointer;
+.buttonNumber {
+  background-color: azure;
+    color: rgb(8, 120, 168);
+    border: 3px solid rgba(0, 178, 255, 1);
+    width: 40px;
+    height: 40px;
+    margin: 40px;
+    border-radius: 5px;
+    font-size: 15px;
     font-weight: bold;
-    filter: drop-shadow(0 0 15px #4f669c) drop-shadow(0 0 50px #4f669c)
-      contrast(2) brightness(2);
-    transition: 0.5s;
-  }
+}
+
+.buttonNumber:hover {
+  color: white;
+    background-color: rgba(0, 178, 255, 1);
+}
+
   
-  .button:hover {
-    color: white;
-    background-color: #4f669c;
-    filter: drop-shadow(0 0 20px #4f669c) contrast(2) brightness(2);
-  }

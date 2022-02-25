@@ -1,0 +1,87 @@
+.container{
+    background: url('https://cutewallpaper.org/21/pokemon-background/Free-download-Pokemon-background-ID278699-full-hd-for-desktop.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 1100px;
+    
+}
+.block{
+  display:flex;
+  flex-direction: column; 
+  align-items: flex-start;
+  padding-top: 100px;
+  padding-left: 300px;
+}
+
+.buttonVolver {
+  background-color: yellow;
+  color: black;
+  border: 3px solid black;
+  width: 300px;
+  height: 50px;
+  margin-top:5px;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: bold;    
+}  
+.buttonVolver:hover {
+  color: yellow;
+  background-color: black;
+} 
+
+.tituloCreate{
+  font-size: 50px;
+  letter-spacing: -2px;
+  color: #fff;
+  text-shadow: 0 0 5px #D6552E, 0 0 10px #D6552E,
+    0 0 20px #D6552E, 0 0 60px #5a3023,
+    0 0 100px #5a3023, 0 0 160px #5a3023;
+  }
+
+label{
+  color:#D6552E;
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+input{
+  background-color: yellow;
+  color: black;
+  border: 3px solid black;
+  margin: 5px;
+}
+.inputName{
+  background-color: yellow;
+  color: black;
+  width: 200px;
+  height: 30px;
+  border: 3px solid black;
+  margin: 5px;
+}
+
+.select{
+  background-color: yellow;
+  color: black;
+  border: 3px solid black;
+  margin: 5px;
+}
+
+.buttonCrear{
+  background-color: yellow;
+  color: black;
+  border: 3px solid black;
+  width: 200px;
+  height: 40px;
+  margin-top:20px;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: bold; 
+}
+.buttonCrear:hover {
+  color: yellow;
+  background-color: black;
+} 
+
+

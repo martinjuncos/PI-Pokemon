@@ -1,4 +1,5 @@
 import React from "react";
+import style from './PokemonCreate.module.css'
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -89,43 +90,31 @@ export default function PokemonCreate() {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className={style.container}>
+      <div className={style.block}>
+
+      <div  > 
       <Link to="/home">
-        <button>Volver</button>
+        <button className= {style.buttonVolver}>Volver</button>
       </Link>
-      <h1>Crear Pokemon</h1>
+      </div>
+
+      <div > 
+      <h1 className={style.tituloCreate}>Crear Pokemon</h1>
+      </div>
+
+      <div className={style.fomulario}> 
       <form  onSubmit={(e) => handleSubmit(e)}>
 
         <div>
-          <label>Nombre</label>
-          <input  onChange={(e) => handleChange(e)} value={input.name} type="text" name="name" />
+          <label >Nombre</label>
+          <input  className={style.inputName} onChange={(e) => handleChange(e)} value={input.name} type="text" name="name" />
           {errors.name && (
             <p className= 'error' >{errors.name}</p>
           )}
         </div>
 
-        <div>
-          <label>Tipo</label>
-          <select onChange={(e) => handleSelect(e)}>
-            {types.map((t, index) => (
-              <option key={index} value={t.name}>
-                {t.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div>
-        {input.types.map((ty, index) => (
-                  <div key={index}>
-                    <p>{ty}</p>
-                    <button
-                      onClick={(e) => handleDelete(ty, e)}
-                    >
-                      x
-                    </button>
-                  </div>
-                ))}
-        </div>
+        
 
         <div>
           <label>Hp</label>
@@ -174,11 +163,40 @@ export default function PokemonCreate() {
           <input  onChange={(e) => handleChange(e)} value={input.image} type="text" name="image" />
         </div>
 
-        <button type= 'submit'>
+        <div>
+          <label>Tipo</label>
+          <select className={style.select} onChange={(e) => handleSelect(e)}>
+            {types.map((t, index) => (
+              <option key={index} value={t.name}>
+                {t.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        
+        <div>
+        {input.types.map((ty, index) => (
+                  <div key={index}>
+                    <p>{ty}</p>
+                    <button
+                    
+                      onClick={(e) => handleDelete(ty, e)}
+                    >
+                      x
+                    </button>
+                  </div>
+                ))}
+                
+        </div>
+
+        <button className={style.buttonCrear} type= 'submit'>
             Crear Pokemon
         </button>
 
       </form>
+      </div>
+
+      </div>
     </div>
   );
 }

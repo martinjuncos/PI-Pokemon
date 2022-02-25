@@ -1,53 +1,18 @@
-body {
-	margin: 0;
-	padding: 0;
-	background-color: #000;
-}
-.neon {
-    font-size: 20px;
-    color: #fff;
-    margin-top: 10%;
-    text-shadow: 0 0 5px rgba(0, 178, 255, 1), 0 0 10px rgba(0, 178, 255, 1),
-      0 0 20px rgba(0, 178, 255, 1), 0 0 40px rgba(38, 104, 127, 1),
-      0 0 80px rgba(38, 104, 127, 1), 0 0 90px rgba(38, 104, 127, 1),
-      0 0 100px rgba(38, 104, 127, 1), 0 0 140px rgba(38, 104, 127, 1),
-      0 0 180px rgba(38, 104, 127, 1);
-  }
 
 .block {
-	position: relative;
-	margin: 50px auto 0;
-	width: 300px;
-	height: auto;
-	background: linear-gradient(0deg, #000, #272727);
+	margin: 30px;
+	width: 200px;
+	height: 370px;
+	padding: 15px;
+	background: linear-gradient(1deg, rgba(0, 178, 255, 1), #ecf3f3);
+	
+	
 }
 
-.block:before, .block:after {
-	content: '';
-	position: absolute;
-	left: -2px;
-	top: -2px;
-	background: linear-gradient(45deg, #fb0094, #0000ff, #00ff00,#ffff00, #ff0000, #fb0094, 
-		#0000ff, #00ff00,#ffff00, #ff0000);
-	background-size: 400%;
-	width: calc(100% + 4px);
-	height: calc(100% + 4px);
-	z-index: -1;
-	animation: steam 20s linear infinite;
-}
+.nombre{
+	font-size: 40px;
+	margin-top: 1px;
+	letter-spacing: -2px;
+	color: rgb(71, 114, 150);
 
-@keyframes steam {
-	0% {
-		background-position: 0 0;
-	}
-	50% {
-		background-position: 400% 0;
-	}
-	100% {
-		background-position: 0 0;
-	}
-}
-
-.block:after {
-	filter: blur(50px);
 }

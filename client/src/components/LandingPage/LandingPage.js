@@ -5,14 +5,14 @@ import style from './LandingPage.module.css'
 export default function LandingPage() {
 
   return (
-    <div className= {style.neon}>
+    <div className= {style.landing}>
 
-      <h1 >Henry Pokemon</h1>
+      <h1 className= {style.titulo}>Henry Pokemon</h1>
 
-      <h1>Bienvenidos</h1>
+      <h2 className= {style.subtitulo} >Bienvenidos</h2>
 
       <Link to="/home">
-        <button className= {style.button}>Ingresar</button>
+        <button className= {style.buttonLanding}>Ingresar</button>
       </Link>
 
     </div>

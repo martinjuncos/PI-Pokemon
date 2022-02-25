@@ -12,7 +12,7 @@ export default function Paginado({ pokemonsPerPage, allPokemons, paginado }) {
       <div >
         {pageNumber &&
           pageNumber.map((n ) => (
-            <button className={style.button} onClick={() => paginado(n)} key={n}>
+            <button className={style.buttonNumber} onClick={() => paginado(n)} key={n}>
               {n}
             </button>
           ))}

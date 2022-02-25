@@ -19,34 +19,27 @@ export default function Detail() {
 
   return (
 
-    <div>
+    <div className= {style.container}>
         <div>
-          <br/>
           <Link to="/home">
-            <button className= {style.button}>Volver</button>
+            <button className= {style.buttonDetail}>Volver</button>
           </Link>
-          <div className={style.block}> 
-          <br/>
-
-          <h1 className= {style.neon}> {detailPokemon.name}</h1>
-
-          <img
+          <div> 
+<img
+          className= {style.img}
             src={detailPokemon.image}
             alt="imagenot fund"
-            width="250"
-            height="150"
+
           />
+          <h1 className= {style.name}> {detailPokemon.name}</h1>
 
-          <h2 className= {style.neon}> {detailPokemon.hp}</h2>
+          
+          <h3>Cantidad de daño que puede recibir</h3>
+          <h2 > {detailPokemon.hp}</h2>
+          <h3>Atributos asociados a los ataques</h3>
+          <h2 >{detailPokemon.types?.join(' - ')}</h2>
 
-          <h3 className= {style.neon}>{detailPokemon.types?.join(' - ')}</h3>
-          <br/>
 
-          {/* {detailPokemon.types?.map((e, index) =>{
-            return(
-             <h3 className= {style.neon} key= {index}>{e} </h3>
-            )
-          })}   */}
           </div>      
             
         </div>
