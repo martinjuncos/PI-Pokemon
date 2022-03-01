@@ -157,11 +157,16 @@ const getPokemonByNameApi = async (name) => {
 //          BUSCAR POKEMON POR NAME DB
 
 const getPokemonByNameDb = async (name) => {
-  const pokemonsDb2 = await getPokemonDb()
-  const pokemonsDb2Filter = pokemonsDb2.filter(
-    (p) => p.name.toLowerCase() === name.toLowerCase(),
-  )
-  return pokemonsDb2Filter
+  try{
+    const pokemonsDb2 = await getPokemonDb()
+    const pokemonsDb2Filter = pokemonsDb2.filter(
+      (p) => p.name.toLowerCase() === name.toLowerCase(),
+    )
+    return pokemonsDb2Filter
+  }catch (error) {
+    return 'Pokemon no encontrado'
+  }
+
 }
 
 module.exports = {

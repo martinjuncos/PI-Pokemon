@@ -11,8 +11,9 @@ const router = Router()
 
 //          GET POKEMOS / NAME         
 
-router.get('/', async (req, res, next) => {
+router.get('/', async (req, res) => {
   const name = req.query.name
+
   if (!name) {
     const allPokemon = await getAllPokemons()
     res.send(allPokemon)
@@ -32,7 +33,7 @@ router.get('/', async (req, res, next) => {
     if (pokemonByName.length > 0) {
       res.send(pokemonByName)
     } else {
-      res.send('not found')
+      res.status(404).send('Pokemon no encontrado')
     }
   }
 })
@@ -40,6 +41,7 @@ router.get('/', async (req, res, next) => {
 //          GET POKEMOS ID         
 
 router.get('/:id', async (req, res, next) => {
+
   try {
     const { id } = req.params
     if (id.length < 5) {
@@ -71,19 +73,6 @@ router.post('/', async (req, res, next) => {
       createInDb,
     } = req.body
 
-    console.log(
-      'llego al post',
-      name,
-      types,
-      hp,
-      attack,
-      defense,
-      speed,
-      height,
-      weight,
-      image,
-      createInDb,
-    )
     let allPokemons = await getAllPokemons()
 
     let repeatPokemon = allPokemons.filter(

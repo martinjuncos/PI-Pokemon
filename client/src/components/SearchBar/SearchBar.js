@@ -16,7 +16,7 @@ export default function SearchBar(){
     function handleSubmit(e){
         e.preventDefault();
         dispatch(searchByName(name));
-        setName(''); //para que se limpie en el input
+        setName(''); 
     }
 
 

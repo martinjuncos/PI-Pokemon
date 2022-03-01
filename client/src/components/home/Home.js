@@ -27,7 +27,6 @@ export default function Home() {
   const lastPokemon = currentPage * pokemonsPerPage;
   const firstPokemon = lastPokemon - pokemonsPerPage;
   let currentPokemons = allPokemons.slice(firstPokemon, lastPokemon);
-
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -38,6 +37,7 @@ export default function Home() {
   const ArrType = [];
   objType.map((e) => e.forEach((l) => ArrType.push(l.name ? l.name : l)));
   const types = [...new Set(ArrType)];
+
 
   //            USE EFFECT
 
@@ -170,7 +170,6 @@ export default function Home() {
                 name={el.name}
                 image={el.image}
                 types={el.types}
-                attack={el.attack}
               />
             </Link>
           </div>
